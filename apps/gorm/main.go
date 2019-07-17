@@ -29,7 +29,48 @@ func main() {
 	// 最後にDB接続を切断
 	defer db.Close()
 
-	lang := lang{}
-	db.First(&lang)
-	fmt.Println(lang)
+	langFirst := lang{}
+	// SELECT * FROM langs ORDER BY id LIMIT 1;
+	db.First(&langFirst)
+	fmt.Println(langFirst)
+
+	langTake := lang{}
+	// SELECT * FROM langs LIMIT 1;
+	db.Take(&langTake)
+	fmt.Println(langTake)
+
+	// SELECT * FROM langs ORDER BY id DESC LIMIT 1;
+	langLast := lang{}
+	db.Last(&langLast)
+	fmt.Println(langLast)
+
+	// SELECT * FROM langs;
+	langAll := []lang{}
+	db.Find(&langAll)
+	fmt.Println(langAll)
+
+	// SELECT * FROM langs WHERE id = 3;
+	langSome := lang{}
+	db.First(&langSome, 4)
+	fmt.Println(langSome)
+
+	// SELECT * FROM langs WHERE name = "PHP" LIMIT 1;
+	langWhereFirst := lang{}
+	db.Where("name = ?", "PHP").First(&langWhereFirst)
+	fmt.Println(langWhereFirst)
+
+	// SELECT * FROM langs WHERE name = 'Java';
+	langWhereFind := []lang{}
+	db.Where("name = ?", "Java").Find(&langWhereFind)
+	fmt.Println(langWhereFind)
+
+	// SELECT * FROM langs WHERE name <> 'Ruby'
+	langWhereNotFind := []lang{}
+	db.Where("name <> ?", "Ruby").Find(&langWhereNotFind)
+	fmt.Println(langWhereNotFind)
+
+	// SELECT * FROM langs WHERE name IN ('PHP', 'Ruby');
+	langWhereIn := []lang{}
+	db.Where("name IN (?)", []string{"PHP", "Ruby"}).Find(&langWhereIn)
+	fmt.Println(langWhereIn)
 }
