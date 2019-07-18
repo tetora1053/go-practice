@@ -70,7 +70,27 @@ func main() {
 	fmt.Println(langWhereNotFind)
 
 	// SELECT * FROM langs WHERE name IN ('PHP', 'Ruby');
-	langWhereIn := []lang{}
-	db.Where("name IN (?)", []string{"PHP", "Ruby"}).Find(&langWhereIn)
-	fmt.Println(langWhereIn)
+	langWhereInFind := []lang{}
+	db.Where("name IN (?)", []string{"PHP", "Ruby"}).Find(&langWhereInFind)
+	fmt.Println(langWhereInFind)
+
+	// SELECT * FROM langs WHERE name LIKE '%va%;
+	langWhereLikeFind := []lang{}
+	db.Where("name LIKE ?", "%va%").Find(&langWhereLikeFind)
+	fmt.Println(langWhereLikeFind)
+
+	// SELECT * FROM langs WHERE id = 4 AND name = 'Java'
+	langWhereAndFind := []lang{}
+	db.Where("id = ? AND name = ?", "4", "Java").Find(&langWhereAndFind)
+	fmt.Println(langWhereAndFind)
+
+	langWhereTimeFind := []lang{}
+	lastWeek := "2019-07-08"
+	db.Where("update_date > ?", lastWeek).Find(&langWhereTimeFind)
+	fmt.Println(langWhereTimeFind)
+
+	langWhereBetweenFind := []lang{}
+	today := "2019-07-12"
+	db.Where("update_date BETWEEN ? AND ?", lastWeek, today).Find(&langWhereBetweenFind)
+	fmt.Println(langWhereBetweenFind)
 }
