@@ -84,11 +84,13 @@ func main() {
 	db.Where("id = ? AND name = ?", "4", "Java").Find(&langWhereAndFind)
 	fmt.Println(langWhereAndFind)
 
+	// SELECT * FROM langs WHERE update_date > '2019-07-08'
 	langWhereTimeFind := []lang{}
 	lastWeek := "2019-07-08"
 	db.Where("update_date > ?", lastWeek).Find(&langWhereTimeFind)
 	fmt.Println(langWhereTimeFind)
 
+	// SELECT * FROM langs WHERE update_date > BETWEEN '2019-07-08' AND '2019-07-12'
 	langWhereBetweenFind := []lang{}
 	today := "2019-07-12"
 	db.Where("update_date BETWEEN ? AND ?", lastWeek, today).Find(&langWhereBetweenFind)
