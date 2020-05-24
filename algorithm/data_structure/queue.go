@@ -17,7 +17,7 @@ type queue []p
 
 func (q queue) enqueue(p p) {
 	q[tail] = p
-	if tail + 1 == len(q) {
+	if tail+1 == len(q) {
 		tail = 0
 		return
 	}
@@ -37,11 +37,11 @@ func (q queue) dequeue() (x p) {
 func main() {
 	var (
 		n, qtm, time, elapsed int
-		name string
+		name                  string
 	)
 	fmt.Scan(&n, &qtm)
 	q := make(queue, n+1)
-	for i:=1; i<=n; i++ {
+	for i := 1; i <= n; i++ {
 		fmt.Scan(&name, &time)
 		q[i].name = name
 		q[i].time = time
@@ -63,4 +63,3 @@ func main() {
 		elapsed += qtm
 	}
 }
-

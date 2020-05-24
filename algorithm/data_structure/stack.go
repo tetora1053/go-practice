@@ -2,15 +2,15 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"os"
-	"bufio"
-	"strings"
 	"strconv"
+	"strings"
 )
 
 var (
-	top int
+	top   int
 	stack []int
 )
 
@@ -20,7 +20,7 @@ func init() {
 
 func push(x int) {
 	top++
-	stack[top]= x
+	stack[top] = x
 }
 
 func pop() int {
@@ -36,13 +36,13 @@ func main() {
 	for _, v := range s {
 		if v == "+" {
 			b, a := pop(), pop()
-			push(a+b)
+			push(a + b)
 		} else if v == "-" {
 			b, a := pop(), pop()
-			push(a-b)
+			push(a - b)
 		} else if v == "*" {
 			b, a := pop(), pop()
-			push(a*b)
+			push(a * b)
 		} else {
 			x, _ := strconv.Atoi(v)
 			push(x)
@@ -50,4 +50,3 @@ func main() {
 	}
 	fmt.Println(pop())
 }
-
