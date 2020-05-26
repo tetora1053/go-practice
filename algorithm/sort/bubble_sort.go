@@ -9,7 +9,7 @@ func bubbleSort(s []int) (sw int) {
 	i := 0
 	for flag {
 		flag = false
-		for j:=len(s)-1; j>i; j-- {
+		for j := len(s) - 1; j > i; j-- {
 			if s[j] < s[j-1] {
 				s[j], s[j-1] = s[j-1], s[j]
 				flag = true
@@ -25,10 +25,10 @@ func main() {
 	fmt.Scan(&n)
 
 	s := make([]int, n)
-	for i:=0; i<n; i++ {
+	for i := 0; i < n; i++ {
 		fmt.Scan(&s[i])
 	}
-	
+
 	sw := bubbleSort(s)
 	fmt.Println(s)
 	fmt.Println(sw)

@@ -7,9 +7,9 @@ import (
 )
 
 func selectionSort(s []int) {
-	for i:=0; i<len(s); i++ {
+	for i := 0; i < len(s); i++ {
 		minj := i
-		for j:=i+1; j<len(s); j++ {
+		for j := i + 1; j < len(s); j++ {
 			if s[j] < s[minj] {
 				minj = j
 			}
@@ -23,7 +23,7 @@ func main() {
 	fmt.Scan(&n)
 
 	s := make([]int, n)
-	for i:=0; i<n; i++ {
+	for i := 0; i < n; i++ {
 		fmt.Scan(&s[i])
 	}
 	selectionSort(s)

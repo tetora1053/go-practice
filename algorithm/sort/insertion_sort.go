@@ -11,12 +11,12 @@ func main() {
 	var n int
 	fmt.Scan(&n)
 	s := make([]int, n)
-	for i:=0; i<n; i++ {
+	for i := 0; i < n; i++ {
 		fmt.Scan(&s[i])
 	}
 
 	fmt.Println(s)
-	for i:=1; i<n; i++ {
+	for i := 1; i < n; i++ {
 		v := s[i]
 		j := i - 1
 		for j >= 0 && v < s[j] {
@@ -27,4 +27,3 @@ func main() {
 		fmt.Println(s)
 	}
 }
-
