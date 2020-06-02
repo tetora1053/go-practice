@@ -1,5 +1,5 @@
-// 二分探索木：挿入,検索
-// 螺旋本p209,p214
+// 二分探索木：挿入,検索、削除
+// 螺旋本p209,p214,p217
 package main
 
 import (
@@ -60,6 +60,58 @@ func find(key int) {
 	fmt.Println("no")
 }
 
+func delete(key int) {
+	var target, c *node
+	cur := root
+
+	for cur != nil {
+		if cur.key == key {
+			// 削除対象ノードがリーフノード、もしくは子を一つしか持たない場合
+			if cur.l == nil || cur.r == nil {
+				target = cur
+				// 削除対象ノードが子を二つ持っている場合
+			} else {
+				target = getSuccessor(cur.r)
+				cur.key = target.key
+			}
+
+			if target.l != nil {
+				c = target.l
+			} else if target.r != nil {
+				c = target.r
+			}
+			break
+		}
+		if key < cur.key {
+			cur = cur.l
+		} else {
+			cur = cur.r
+		}
+	}
+
+	// 削除対象ノードがなければreturn
+	if target == nil {
+		return
+	}
+
+	if c != nil {
+		c.p = target.p
+	}
+	if target == target.p.l {
+		target.p.l = c
+	} else {
+		target.p.r = c
+	}
+}
+
+func getSuccessor(node *node) *node {
+	cur := node
+	for cur != nil {
+		cur = cur.l
+	}
+	return cur
+}
+
 func inorder(root *node) {
 	if root == nil {
 		return
@@ -98,6 +150,9 @@ func main() {
 		case "find":
 			fmt.Scan(&key)
 			find(key)
+		case "delete":
+			fmt.Scan(&key)
+			delete(key)
 		}
 	}
 }
